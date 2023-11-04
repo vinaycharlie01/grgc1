@@ -36,6 +36,30 @@ func (s *UserServiceServer) GetUsersByIds(req *userpb.GetUsersRequest, stream us
 	return nil
 }
 
+// / Create a gRPC method to receive and process user data
+func (s *UserServiceServer) CreateUser(ctx context.Context, req *userpb.User) (*userpb.User, error) {
+	// Process the user data and store it as needed
+	// You can create a unique ID or use your own logic
+
+	// For example, you can generate a unique ID:
+	// userID := GenerateUniqueUserID()
+
+	// Create a new user based on the request data
+	newUser := &userpb.User{
+		Id:      req.Id,
+		Fname:   req.Fname,
+		City:    req.City,
+		Phone:   req.Phone,
+		Height:  req.Height,
+		Married: req.Married,
+	}
+
+	// Store the new user in your data structure (e.g., a map)
+	s.users[req.Id] = newUser
+
+	return newUser, nil
+}
+
 func main() {
 	lis, err := net.Listen("tcp", ":50051")
 	if err != nil {

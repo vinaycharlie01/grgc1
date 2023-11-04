@@ -17,6 +17,7 @@ message User {
 service UserService {
     rpc GetUserById (GetUserRequest) returns (User);
     rpc GetUsersByIds (GetUsersRequest) returns (stream User);
+    rpc CreateUser (User) returns (User);
 }
 
 message GetUserRequest {
